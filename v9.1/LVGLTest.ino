@@ -7,6 +7,7 @@
 // https://github.com/m5stack/M5Core2/blob/master/src/M5Display.h
 // https://github.com/Bodmer/TFT_eSPI/blob/master/TFT_eSPI.h
 // 
+
 #include <M5Core2.h>
 
 #define LV_HOR_RES_MAX 320
@@ -59,7 +60,6 @@ void init_touch() {
   indev = lv_indev_create();
   lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
   lv_indev_set_read_cb(indev, my_touchpad_read);
-  last_touched = millis();
 }
 
 // LVGL display elements and callbacks
@@ -86,6 +86,7 @@ static void btn_event_cb(lv_event_t *e)
 static void slider_event_cb(lv_event_t *e)
 {
   lv_obj_t *slider = (lv_obj_t *) lv_event_get_target(e);
+  //lv_obj_t *label = lv_obj_get_child(slider, 0);
   lv_label_set_text_fmt(label1, "%"LV_PRId32, lv_slider_get_value(slider));
   lv_obj_align_to(label1, slider, LV_ALIGN_OUT_TOP_MID, 0, -15);    /*Align top of the slider*/
 }
