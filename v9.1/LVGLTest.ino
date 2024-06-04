@@ -35,11 +35,16 @@ void my_disp_flush(lv_display_t *disp, const lv_area_t *area, uint8_t *px_map) {
 
 
 void init_disp() {
-  static lv_draw_buf_t *buf1 = (lv_draw_buf_t *)heap_caps_malloc((LV_HOR_RES_MAX * LV_VER_RES_MAX * sizeof(lv_color_t)), MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
-  static lv_draw_buf_t *buf2 = (lv_draw_buf_t *)heap_caps_malloc((LV_HOR_RES_MAX * LV_VER_RES_MAX * sizeof(lv_color_t)), MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
+  //int buf_size = LV_HOR_RES_MAX * LV_VER_RES_MAX * sizeof(lv_color_t);
+  int buf_size = LV_HOR_RES_MAX * LV_VER_RES_MAX * sizeof(lv_color_t) / 10;
+
+  static lv_draw_buf_t *buf1 = (lv_draw_buf_t *)heap_caps_malloc(buf_size, MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
+  static lv_draw_buf_t *buf2 = (lv_draw_buf_t *)heap_caps_malloc(buf_size, MALLOC_CAP_8BIT | MALLOC_CAP_SPIRAM);
+
   disp = lv_display_create(LV_HOR_RES_MAX, LV_VER_RES_MAX);
   lv_display_set_flush_cb(disp, my_disp_flush);
-  lv_display_set_buffers(disp, buf1, buf2, LV_HOR_RES_MAX * LV_VER_RES_MAX * sizeof(lv_color_t), LV_DISPLAY_RENDER_MODE_FULL);
+  //lv_display_set_buffers(disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_FULL);
+  lv_display_set_buffers(disp, buf1, buf2, buf_size, LV_DISPLAY_RENDER_MODE_PARTIAL);
 }
 
 
