@@ -25,7 +25,7 @@ Edit the settings
 
 The compile and run.   
 
-## For v9.0
+## For v9.1
 
 Install lvgl in library manager   
 Compile and run - no changes needed to lv_conf.h   
